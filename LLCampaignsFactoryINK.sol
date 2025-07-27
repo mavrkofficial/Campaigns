@@ -167,8 +167,8 @@ contract TokenCampaign is ReentrancyGuard {
     /// @notice Whether the token has been launched
     bool public launched;
     
-    /// @notice Minimum ETH required to launch the campaign (0.0001 ETH)
-    uint256 public constant MIN_LAUNCH_ETH = 0.0001 ether;
+    /// @notice Minimum ETH required to launch the campaign (1.00 ETH)
+    uint256 public constant MIN_LAUNCH_ETH = 1.00 ether;
     
     /// @notice Uniswap V3 Position Manager address
     address public constant POSITION_MANAGER = 0xC0836E5B058BBE22ae2266e1AC488A1A0fD8DCE8;
@@ -202,7 +202,7 @@ contract TokenCampaign is ReentrancyGuard {
     mapping(address => uint256) public contributions;
     
     /// @notice The largest single contribution (anchor contribution)
-    uint256 public anchorContribution = 0.0005 ether;
+    uint256 public anchorContribution = 5.00 ether;
     
     /// @notice Maximum tokens per wallet (5% of total supply)
     uint256 public constant ANCHOR_TOKENS = 50_000_000 * 1e18;
@@ -274,10 +274,10 @@ contract TokenCampaign is ReentrancyGuard {
      * - Token allocation at claim time is based on cumulative contribution relative to the anchor
      * 
      * Multiple Deposit Example:
-     * - User deposits 0.0001 ETH → Total: 0.0001 ETH
-     * - User deposits 0.0002 ETH → Total: 0.0003 ETH
-     * - User deposits 0.0003 ETH → Total: 0.0006 ETH (becomes new anchor if largest)
-     * - User claims tokens based on 0.0006 ETH total contribution
+     * - User deposits 1.00 ETH → Total: 1.00 ETH
+     * - User deposits 2.00 ETH → Total: 3.00 ETH
+     * - User deposits 3.00 ETH → Total: 6.00 ETH (becomes new anchor if largest)
+     * - User claims tokens based on 6.00 ETH total contribution
      * 
      * @param referrer The referrer address in bytes32 format (optional)
      * 
